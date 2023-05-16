@@ -1,0 +1,339 @@
+/*  import google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+    --light: #fff;
+    --bg: #ddd;
+    --dark: #34AF6D;
+    --text-color: rgb(85, 83, 83);
+    --label-color: black;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg);
+/*    background-image: url(barbie.jpeg);*/
+    background-size: cover;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    width: 90px;
+    /* width: 280px; */
+    background: var(--light);
+    overflow: hidden;
+    transition: 1s;
+}
+
+nav:hover {
+    width: 280px;
+    transition: all 0.5s ease;
+}
+
+.logo {
+    text-align: center;
+    display: flex;
+    margin: 10px 0 0 10px;
+    padding-bottom: 3rem;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+a {
+    position: relative;
+    width: 280px;
+    font-size: 14px;
+    color: var(--text-color);
+    display: table;
+    padding: 10px;
+}
+
+nav .fas {
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.nav-item {
+    position: relative;
+    top: 12px;
+    margin-left: 10px;
+}
+
+a:hover {
+    background: #eee;
+}
+
+a:hover i {
+    color: var(--dark);
+    transition: 0.5s;
+}
+
+.container {
+    display: flex;
+}
+
+/* MAin Section */
+.main {
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+
+.main-top {
+    display: flex;
+    width: 100%;
+}
+
+/*Register Section */
+.form {
+    width: 40%;
+    margin: 2.5rem 0 0 30%;
+    background: var(--light);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.form .field {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form .field .data {
+    display: flex;
+    flex-direction: column;
+    width: calc((100% / 2) - 2%);
+}
+
+.form label {
+    font-size: 17px;
+    font-weight: 550;
+    margin-bottom: 5px;
+    user-select: none;
+    color: var(--label-color);
+}
+
+.form input {
+    padding: 5px;
+    font-size: 16px;
+    color: var(--text-color);
+    outline: none;
+    border: 1px solid var(--bg);
+    border-radius: 5px;
+}
+
+.form .field select {
+    padding: 5px;
+    font-size: 16px;
+    color: var(--text-color);
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form .btn {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.form button {
+    height: 35px;
+    padding: 5px 60px;
+    background: var(--dark);
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: var(--light);
+    border-radius: 5px;
+    transition: all 0.5s ease;
+}
+
+.form button:hover {
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+    background: var(--text-color);
+}
+
+/*Attendance List serction  */
+.attendance {
+    width: 80%;
+    margin: 50px 0 0 10%;
+    text-transform: capitalize;
+}
+
+.attendance-list {
+    padding: 10px;
+    margin-top: 10px;
+    background: var(--light);
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+}
+
+.attendance .attendance-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.attendance .attendance-data {
+    width: calc((100% / 2) - 10px);
+}
+
+.attendance .attendance-data.search {
+    display: flex;
+    justify-content: right;
+}
+
+.attendance .attendance-data input {
+    padding: 10px;
+    margin-right: 10px;
+    color: var(--text-color);
+    outline: none;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.attendance .attendance-data button {
+    padding: 10px 25px;
+    border-radius: 5px;
+    background: var(--dark);
+    transition: all 0.5s ease;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+.attendance .attendance-data button:hover {
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.25);
+    background: var(--text-color);
+}
+
+.table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 15px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+}
+
+.table .thead .tr {
+    color: var(--light);
+    background: var(--dark);
+}
+
+.table .thead .tr,
+.table .tbody .tr{
+    width: 100%;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.table .th,
+.table .td {
+    width: calc((100% / 7) - 2%);
+    padding: 12px 0;
+}
+
+.table .tbody .tr {
+    border-bottom: 1px solid #ddd;
+    color: var(--label-color);
+}
+
+.table .tbody .tr:nth-of-type(odd) {
+    background: #f3f3f3;
+}
+
+.table .tbody .tr.active {
+    font-weight: bold;
+    color: #4AD489;
+}
+
+.table .tbody .tr:last-of-type {
+    border-bottom: 2px solid #4AD489;
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes slide {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    
+    50% {
+        transform: translateX(1550px);
+    }
+}
+
+.fast {
+    animation-duration: 1s;
+}
+
+.sloq {
+    animation-duration: 10s;
+}
+
+.slide {
+    animation-name: slide;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+}
+
+.bounce {
+    animation-name: bounce;
+    animation-iteration-count: infinite;
+    animation-duration: 5s;
+    animation-fill-mode: both;
+}
