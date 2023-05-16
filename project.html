@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Attendance Records</title>
+    <link rel="stylesheet" href="project.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#">
+                        <i class="fas fa-chart-bar"></i>
+                        <span class="nav-item">Attendance</span>
+                    </a></li>
+                <li><a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span class="nav-item">Setting</span>
+                    </a></li>
+            </ul>
+        </nav>
+
+
+        <section class="main">
+            <div class="main-top">
+                <h1 class="bounce">Attendance Records</h1>
+            </div>
+
+            <div class="form">
+                <form id="insert-form">
+                    <div class="field">
+                        <div class="data">
+                            <label>First Name</label>
+                            <input type="text" placeholder="Enter First Name" id="first_name" name="first_name">
+                        </div>
+                        <div class="data">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="Enter Last Name" id="last_name" name="last_name">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="data">
+                            <label>Date</label>
+                            <input type="date" placeholder="Enter Last Name" id="date" name="date">
+                        </div>
+                        <div class="data">
+                            <label>Status</label>
+                            <select name="status" id="status">
+                                <option hidden value="">Select Status</option>
+                                <option value="Present">Present</option>
+                                <option value="Absent">Absent</option>
+                                <option value="Late">Late</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="data">
+                            <label>Year</label>
+                            <select name="year" id="year">
+                                <option hidden value="">Select Year</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div class="data">
+                            <label>Section</label>
+                            <select name="section" id="section">
+                                <option hidden value="">Select Section</option>
+                                <option value="IT-11">IT-11</option>
+                                <option value="IT-12">IT-12</option>
+                                <option value="IT-13">IT-13</option>
+                                <option value="IT-21">IT-21</option>
+                                <option value="IT-22">IT-22</option>
+                                <option value="IT-23">IT-23</option>
+                                <option value="IT-31">IT-31</option>
+                                <option value="IT-32">IT-32</option>
+                                <option value="IT-33">IT-33</option>
+                                <option value="IT-41">IT-41</option>
+                                <option value="IT-42">IT-42</option>
+                                <option value="IT-43">IT-43</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btn">
+                        <div class="btn-data">
+                            <button type="submit" id="register">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <section class="attendance">
+                <div class="attendance-list">
+                    <div class="attendance-top">
+                        <div class="attendance-data">
+                            <h1>Attendance List</h1>
+                        </div>
+                        <div class="attendance-data search">
+                            <input type="text" id="id_number" name="id_number">
+                            <button type="submit" id="search">Search</button>
+                            <button type="submit" id="delete">Delete</button>
+                        </div>
+                    </div>
+                    <div class="table">
+                        <div class="thead">
+                            <div class="tr">
+                                <div class="th">ID</div>
+                                <div class="th">Firstname</div>
+                                <div class="th">Lastname</div>
+                                <div class="th">Date</div>
+                                <div class="th">Status</div>
+                                <div class="th">Year</div>
+                                <div class="th">Section</div>
+                            </div>
+                        </div>
+
+                        <div class="tbody" id="tbody">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    
+    <script id="listitems" type="text/x-handlebars-template">
+
+        <div class="row" id="logslist">
+            {{#each data}}
+                <div class="tr">
+                    <div class="td">{{id_number}}</div>
+                    <div class="td">{{first_name}}</div>
+                    <div class="td">{{last_name}}</div>
+                    <div class="td">{{date}}</div>
+                    <div class="td">{{status}}</div>
+                    <div class="td">{{year}}</div>
+                    <div class="td">{{section}}</div>
+                </div>
+            {{/each}}
+        </div>
+    </script>
+    <script>
+        const clearFields = () => {
+            $('input[type="text"]').val('');
+            $('input[type="date"]').val('');
+            $('select').val('');
+        }
+
+        const get = (choice) => {
+            M.Toast.dismissAll();
+            // serialize form data
+            var formData = $("#id_number").serializeArray();
+            const finalUrl = choice ? 'http://172.17.100.12:8081/alsong/cgi-bin/get.o' : 'http://172.17.100.12:8081/alsong/cgi-bin/delete.o';
+
+            console.log(JSON.stringify(formData));
+
+            $.ajax({
+                url: finalUrl,
+                type: 'POST',
+                data: JSON.stringify(formData),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === "success") {
+                        console.log(response.data)
+
+                        if(choice){
+                            var template = Handlebars.compile($("#listitems").html());
+                            var html = template(response);
+
+                            $("#tbody").html(html);
+                        }else{
+                            document.querySelector('#id_number').value = '';
+                            get(true);
+                        }
+
+                    } else if (response.status === "error") {
+                        console.log(response.message)
+                        console.log(response.message_additional)
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        }
+        get();
+        $(document).ready(function() {
+            $("#register").click(function(event) {
+                event.preventDefault();
+
+                var formData = $("#insert-form").serializeArray();
+
+                $.ajax({
+                    url: 'http://172.17.100.12:8081/alsong/cgi-bin/post.o',
+                    type: 'POST',
+                    data: JSON.stringify(formData),
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === "success") {
+                            console.log(response.message)
+                            console.log(response.data)
+
+                            clearFields();
+                            get(true);
+
+                        } else if (response.status === "error") {
+                            console.log(response.message)
+                            console.log(response.message_additional)
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+
+            $('#search').click(function(event) {
+                event.preventDefault();
+                get(true);
+            });
+            $('#delete').click(function(event) {
+                event.preventDefault();
+                get(false);
+            });
+        });
+
+    </script>
+</body>
+
+</html>
