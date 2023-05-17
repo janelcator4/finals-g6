@@ -6,7 +6,6 @@
     <title>Attendance Records</title>
     <link rel="stylesheet" href="project.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -130,6 +129,7 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
     <script id="listitems" type="text/x-handlebars-template">
 
@@ -160,8 +160,6 @@
             var formData = $("#id_number").serializeArray();
             const finalUrl = choice ? 'http://172.17.100.12:8081/alsong/cgi-bin/get.o' : 'http://172.17.100.12:8081/alsong/cgi-bin/delete.o';
 
-            console.log(JSON.stringify(formData));
-
             $.ajax({
                 url: finalUrl,
                 type: 'POST',
@@ -170,8 +168,6 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response.status === "success") {
-                        console.log(response.data)
-
                         if(choice){
                             var template = Handlebars.compile($("#listitems").html());
                             var html = template(response);
@@ -192,7 +188,7 @@
                 }
             });
         }
-        get();
+        get(true);
         $(document).ready(function() {
             $("#register").click(function(event) {
                 event.preventDefault();
